@@ -1,28 +1,15 @@
 package tasks
 
+import "strings"
+
 func ReverseWords(s string) string {
-	start := 0
-	result := []byte(s)
-	for i := 0; i < len(s); i++ {
-		if s[i] == ' ' {
-			end := i - 1
-			for start < i {
-				current := s[start]
-				result[start] = s[end]
-				result[end] = current
-				start++
-				end--
-			}
-			start = i + 1
-		}
+	arr := strings.Fields(s)
+	left := 0
+	right := len(arr) - 1
+	for left <= right {
+		arr[left], arr[right] = arr[right], arr[left]
+		left++
+		right--
 	}
-	end := len(result) - 1
-	for start < len(s) {
-		current := s[start]
-		result[start] = s[end]
-		result[end] = current
-		start++
-		end--
-	}
-	return string(result)
+	return strings.Join(arr, " ")
 }

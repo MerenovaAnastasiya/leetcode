@@ -1,17 +1,20 @@
 package tasks
 
 func isHappy(n int) bool {
-	if n == 1 || n == 7 {
-		return true
-	} else if n < 10 {
-		return false
-	} else {
-		sum := 0
-		for n > 0 {
-			temp := n % 10
-			sum += temp * temp
-			n /= 10
-		}
-		return isHappy(sum)
+	slow, fast := n, n
+	for fast != slow {
+		fast = findSquare(findSquare(fast))
+		slow = findSquare(slow)
 	}
+	return fast == 1
+}
+
+func findSquare(n int) int {
+	sum := 0
+	for n > 0 {
+		temp := n % 10
+		sum += temp * temp
+		n /= 10
+	}
+	return sum
 }

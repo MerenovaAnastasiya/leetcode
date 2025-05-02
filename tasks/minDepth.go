@@ -7,17 +7,17 @@ func minDepth(root *TreeNode) int {
 	}
 
 	queue := []*TreeNode{root}
-	minSize := 0
+	minLength := 0
 
 	for len(queue) > 0 {
 		levelSize := len(queue)
-		minSize++
+		minLength++
 		for i := 0; i < levelSize; i++ {
 			current := queue[0]
 			queue = queue[1:]
 
 			if current.Left == nil && current.Right == nil {
-				return minSize
+				return minLength
 			}
 
 			if current.Left != nil {
@@ -29,5 +29,5 @@ func minDepth(root *TreeNode) int {
 			}
 		}
 	}
-	return minSize
+	return minLength
 }
